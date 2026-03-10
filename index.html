@@ -9,6 +9,7 @@
   html,body{height:100%}
   body{display:flex;flex-direction:column;background:#fff}
 
+  /* 微信/浏览器 100%显示 */
   .warn{
     background:#ffe6e6;
     color:#e63946;
@@ -20,42 +21,31 @@
     gap:8px;
   }
 
-  .warn-icon {
-    width:16px;
-    height:16px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="%23e63946"></circle><path d="M11 7h2v6h-2V7z" fill="white"></path><path d="M11 15h2v2h-2z" fill="white"></path></svg>');
-    background-size:cover;
-    flex-shrink:0;
+  /* 纯文字感叹号，所有设备必显 */
+  .warn-icon{
+    color:#e63946;
+    font-weight:bold;
+    font-size:16px;
   }
 
   .main{
-    flex:1;
-    padding:24px 20px;
+    flex:1;padding:24px 20px;
   }
 
   .title{
-    text-align:center;
-    font-size:20px;
-    margin-bottom:16px;
+    text-align:center;font-size:20px;margin-bottom:16px;
   }
 
   .subtitle{
-    text-align:center;
-    color:#666;
-    font-size:15px;
-    margin-bottom:60px;
+    text-align:center;color:#666;font-size:15px;margin-bottom:60px;
   }
 
   .row{
-    display:flex;
-    margin-bottom:16px;
-    font-size:15px;
+    display:flex;margin-bottom:16px;font-size:15px;
   }
 
   .label{
-    width:80px;
-    color:#999;
-    flex-shrink:0;
+    width:80px;color:#999;flex-shrink:0;
   }
 
   .value{
@@ -63,17 +53,14 @@
   }
 
   .footer{
-    text-align:center;
-    color:#aaa;
-    font-size:13px;
-    padding:10px 0 24px 0;
+    text-align:center;color:#aaa;font-size:13px;padding:10px 0 24px 0;
   }
 </style>
 </head>
 <body>
 
 <div class="warn">
-<div class="warn-icon"></div>
+<div class="warn-icon">!</div>
 此内容仅在微信内预览，访问详情请进入微信发票助手小程序
 </div>
 
@@ -101,3 +88,4 @@
 
 </body>
 </html>
+
