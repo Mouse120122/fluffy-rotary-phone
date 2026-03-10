@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>发票信息</title>
+    <title>发票信息预览</title>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <style>
         * {
             margin: 0;
@@ -13,9 +14,32 @@
         }
         body {
             background-color: #ffffff;
-            padding: 20px 16px;
+        }
+        /* 顶部红色警示栏 */
+        .warning-bar {
+            background-color: #fff2f2;
+            padding: 10px 15px;
+            border-bottom: 0.5px solid #ffcccc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .warning-icon {
+            width: 16px;
+            height: 16px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z" fill="#ff4d4f"/><path d="M464 336a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z" fill="#ff4d4f"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+        .warning-text {
+            font-size: 13px;
+            color: #ff4d4f;
+        }
+        /* 内容区域 */
+        .content {
+            padding: 20px 32px;
             color: #333333;
             line-height: 1.4;
+            display: block;
         }
         h1 {
             font-size: 22px;
@@ -45,8 +69,8 @@
         .tip-bottom {
             position: fixed;
             bottom: 20px;
-            left: 16px;
-            right: 16px;
+            left: 32px;
+            right: 32px;
             font-size: 13px;
             color: #999999;
             text-align: center;
@@ -55,27 +79,48 @@
     </style>
 </head>
 <body>
-    <h1>发票信息</h1>
-    <div class="tip-top">
-        以下信息仅为发票二维码所含信息，并不代表查验发票真伪的结果。
+    <!-- 顶部红色警示栏 -->
+    <div class="warning-bar">
+        <div class="warning-icon"></div>
+        <div class="warning-text">此内容仅在微信内预览，访问详情请进入微信发票助手小程序</div>
     </div>
 
-    <div class="info-item">
-        <div class="info-label">发票号码</div>
-        <div class="info-value">25327000000084702876</div>
-    </div>
-    <div class="info-item">
-        <div class="info-label">合计金额</div>
-        <div class="info-value">¥1200000.00(含税)</div>
-    </div>
-    <div class="info-item">
-        <div class="info-label">开票日期</div>
-        <div class="info-value">2025.08.01</div>
+    <!-- 发票内容 -->
+    <div class="content" id="content">
+        <h1>发票信息</h1>
+        <div class="tip-top">
+            以下信息仅为发票二维码所含信息，并不代表查验发票真伪的结果。
+        </div>
+
+        <div class="info-item">
+            <div class="info-label">发票号码</div>
+            <div class="info-value">25327000000084702876</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">合计金额</div>
+            <div class="info-value">¥1200000.00(含税)</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">开票日期</div>
+            <div class="info-value">2025.08.01</div>
+        </div>
+
+        <div class="tip-bottom">
+            如需查验发票真伪，请通过税务机关提供的官方渠道进行查验。
+        </div>
     </div>
 
-    <div class="tip-bottom">
-        如需查验发票真伪，请通过税务机关提供的官方渠道进行查验。
-    </div>
+    <script>
+        // 跳转到微信发票小程序
+        function launchMiniProgram() {
+            if (window.wx) {
+                wx.miniProgram.navigateTo({
+                    url: '/pages/index/index'
+                });
+            }
+        }
+        // 点击页面任意位置跳转
+        document.getElementById('content').onclick = launchMiniProgram;
+    </script>
 </body>
 </html>
-
