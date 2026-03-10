@@ -6,53 +6,98 @@
 <title>发票详情</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-  .warn{background:#ffe6e6;color:#e63946;padding:10px 14px;display:flex;align-items:center;gap:8px;font-size:14px;border-bottom:1px solid #f5c2c2}
-  .warn svg{width:18px;height:18px;flex-shrink:0}
-  .box{padding:22px 20px}
-  .title{text-align:center;font-size:20px;margin-bottom:14px}
-  .desc{text-align:center;color:#555;font-size:15px;margin-bottom:24px}
-  /* 只改这里：向下拉开距离 */
-  .info-list{margin-top:20px}
-  .item{display:flex;margin-bottom:14px;font-size:15px}
-  .item .name{color:#999;width:82px;flex-shrink:0}
-  .item .val{color:#333}
-  .footer{text-align:center;color:#aaa;font-size:13px;margin-top:24px}
+  html,body{height:100%}
+  body{display:flex;flex-direction:column;background:#fff}
+
+  .warn{
+    background:#ffe6e6;
+    color:#e63946;
+    padding:12px 16px;
+    font-size:14px;
+    border-bottom:1px solid #f9c7c7;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  .warn-icon {
+    width:16px;
+    height:16px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="%23e63946"></circle><path d="M11 7h2v6h-2V7z" fill="white"></path><path d="M11 15h2v2h-2z" fill="white"></path></svg>');
+    background-size:cover;
+    flex-shrink:0;
+  }
+
+  .main{
+    flex:1;
+    padding:24px 20px;
+  }
+
+  .title{
+    text-align:center;
+    font-size:20px;
+    margin-bottom:16px;
+  }
+
+  .subtitle{
+    text-align:center;
+    color:#666;
+    font-size:15px;
+    margin-bottom:60px;
+  }
+
+  .row{
+    display:flex;
+    margin-bottom:16px;
+    font-size:15px;
+  }
+
+  .label{
+    width:80px;
+    color:#999;
+    flex-shrink:0;
+  }
+
+  .value{
+    color:#333;
+  }
+
+  .footer{
+    text-align:center;
+    color:#aaa;
+    font-size:13px;
+    padding:10px 0 24px 0;
+  }
 </style>
 </head>
 <body>
 
 <div class="warn">
-<svg viewBox="0 0 24 24" fill="#e63946"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-<span>此内容仅在微信内预览，访问详情请进入微信发票助手小程序</span>
+<div class="warn-icon"></div>
+此内容仅在微信内预览，访问详情请进入微信发票助手小程序
 </div>
 
-<div class="box">
+<div class="main">
   <div class="title">发票信息</div>
-  <div class="desc">以下信息仅为发票二维码所含信息，并不代表查验发票真伪的结果。</div>
+  <div class="subtitle">以下信息仅为发票二维码所含信息，并不代表查验发票真伪的结果。</div>
 
-  <div class="info-list">
-    <div class="item">
-      <div class="name">发票号码</div>
-      <div class="val">25327000000084702876</div>
-    </div>
-    <div class="item">
-      <div class="name">合计金额</div>
-      <div class="val">¥1200000.00(含税)</div>
-    </div>
-    <div class="item">
-      <div class="name">开票日期</div>
-      <div class="val">2025.08.01</div>
-    </div>
+  <div class="row">
+    <div class="label">发票号码</div>
+    <div class="value">25327000000084702876</div>
   </div>
 
-  <div class="footer">如需查验发票真伪，请通过税务机关提供的官方渠道进行查验。</div>
+  <div class="row">
+    <div class="label">合计金额</div>
+    <div class="value">¥1200000.00(含税)</div>
+  </div>
+
+  <div class="row">
+    <div class="label">开票日期</div>
+    <div class="value">2025.08.01</div>
+  </div>
 </div>
 
-<script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-<script>
-  document.querySelector('.box').onclick=function(){
-    if(window.wx)wx.miniProgram.navigateTo({url:'/pages/index/index'})
-  }
-</script>
+<div class="footer">如需查验发票真伪，请通过税务机关提供的官方渠道进行查验。</div>
+
 </body>
 </html>
