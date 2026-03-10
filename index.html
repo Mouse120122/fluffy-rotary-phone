@@ -1,126 +1,58 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>发票信息预览</title>
-    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-        }
-        body {
-            background-color: #ffffff;
-        }
-        /* 顶部红色警示栏 */
-        .warning-bar {
-            background-color: #fff2f2;
-            padding: 10px 15px;
-            border-bottom: 0.5px solid #ffcccc;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .warning-icon {
-            width: 16px;
-            height: 16px;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z" fill="#ff4d4f"/><path d="M464 336a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z" fill="#ff4d4f"/></svg>') no-repeat center;
-            background-size: contain;
-        }
-        .warning-text {
-            font-size: 13px;
-            color: #ff4d4f;
-        }
-        /* 内容区域 */
-        .content {
-            padding: 20px 32px;
-            color: #333333;
-            line-height: 1.4;
-            display: block;
-        }
-        h1 {
-            font-size: 22px;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-        .tip-top {
-            font-size: 16px;
-            color: #333333;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .info-item {
-            display: flex;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        .info-label {
-            color: #999999;
-            width: 85px;
-            flex-shrink: 0;
-        }
-        .info-value {
-            color: #333333;
-        }
-        .tip-bottom {
-            position: fixed;
-            bottom: 20px;
-            left: 32px;
-            right: 32px;
-            font-size: 13px;
-            color: #999999;
-            text-align: center;
-            line-height: 1.5;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>发票详情</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+  .warn{background:#ffe6e6;color:#e63946;padding:10px 14px;display:flex;align-items:center;gap:8px;font-size:14px;border-bottom:1px solid #f5c2c2}
+  .warn svg{width:18px;height:18px;flex-shrink:0}
+  .box{padding:22px 20px}
+  .title{text-align:center;font-size:20px;margin-bottom:14px}
+  .desc{text-align:center;color:#555;font-size:15px;margin-bottom:24px}
+  /* 只改这里：向下拉开距离 */
+  .info-list{margin-top:20px}
+  .item{display:flex;margin-bottom:14px;font-size:15px}
+  .item .name{color:#999;width:82px;flex-shrink:0}
+  .item .val{color:#333}
+  .footer{text-align:center;color:#aaa;font-size:13px;margin-top:24px}
+</style>
 </head>
 <body>
-    <!-- 顶部红色警示栏 -->
-    <div class="warning-bar">
-        <div class="warning-icon"></div>
-        <div class="warning-text">此内容仅在微信内预览，访问详情请进入微信发票助手小程序</div>
+
+<div class="warn">
+<svg viewBox="0 0 24 24" fill="#e63946"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+<span>此内容仅在微信内预览，访问详情请进入微信发票助手小程序</span>
+</div>
+
+<div class="box">
+  <div class="title">发票信息</div>
+  <div class="desc">以下信息仅为发票二维码所含信息，并不代表查验发票真伪的结果。</div>
+
+  <div class="info-list">
+    <div class="item">
+      <div class="name">发票号码</div>
+      <div class="val">25327000000084702876</div>
     </div>
-
-    <!-- 发票内容 -->
-    <div class="content" id="content">
-        <h1>发票信息</h1>
-        <div class="tip-top">
-            以下信息仅为发票二维码所含信息，并不代表查验发票真伪的结果。
-        </div>
-
-        <div class="info-item">
-            <div class="info-label">发票号码</div>
-            <div class="info-value">25327000000084702876</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">合计金额</div>
-            <div class="info-value">¥1200000.00(含税)</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">开票日期</div>
-            <div class="info-value">2025.08.01</div>
-        </div>
-
-        <div class="tip-bottom">
-            如需查验发票真伪，请通过税务机关提供的官方渠道进行查验。
-        </div>
+    <div class="item">
+      <div class="name">合计金额</div>
+      <div class="val">¥1200000.00(含税)</div>
     </div>
+    <div class="item">
+      <div class="name">开票日期</div>
+      <div class="val">2025.08.01</div>
+    </div>
+  </div>
 
-    <script>
-        // 跳转到微信发票小程序
-        function launchMiniProgram() {
-            if (window.wx) {
-                wx.miniProgram.navigateTo({
-                    url: '/pages/index/index'
-                });
-            }
-        }
-        // 点击页面任意位置跳转
-        document.getElementById('content').onclick = launchMiniProgram;
-    </script>
+  <div class="footer">如需查验发票真伪，请通过税务机关提供的官方渠道进行查验。</div>
+</div>
+
+<script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script>
+  document.querySelector('.box').onclick=function(){
+    if(window.wx)wx.miniProgram.navigateTo({url:'/pages/index/index'})
+  }
+</script>
 </body>
 </html>
