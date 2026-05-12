@@ -12,12 +12,7 @@
     <link rel="preload" href="icon_home_menu_ctb.png" as="image">
     <link rel="preload" href="card_bg.png" as="image">
     <link rel="preload" href="flag.png" as="image">
-    <link rel="preload" href="2e68bcc7ae3920719aeb93a9b0ed9421.png" as="image">
-    <link rel="preload" href="icon_correct.png" as="image">
-    <link rel="preload" href="icon_daily.png" as="image">
-    <link rel="preload" href="icon_paper_bank.png" as="image">
-    <link rel="preload" href="icon_lecture.png" as="image">
-    <link rel="preload" href="icon_homework.png" as="image">
+    <link rel="preload" href="func_banner_real.jpg" as="image">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
@@ -48,16 +43,8 @@
         .card-img { width: 100%; display: block; border-radius: 12px; cursor: pointer; transition: transform 0.15s; }
         .card-img:active { transform: scale(0.97); }
 
-        /* ========== 功能图标（5个）========== */
-        .func-grid { display: flex; padding: 8px 12px 4px; gap: 0; }
-        .func-item { flex: 1; text-align: center; cursor: pointer; }
-        .func-item:active { opacity: 0.7; }
-        .func-icon-img { width: 48px; height: 48px; display: block; margin: 0 auto 4px; border-radius: 14px; }
-        .func-title { font-size: 12px; color: #333; }
-
-        /* ========== 广告横幅（移到最下面，远离卡片）========== */
-        .banner { margin: 30px 12px 20px 12px; border-radius: 12px; overflow: hidden; background: transparent; }
-        .banner img { width: 100%; display: block; border-radius: 12px; }
+        /* ========== 功能+横幅大图（合并展示） ========== */
+        .func-banner { padding: 8px 12px; }
 
         /* ========== 底部导航（子页面时隐藏） ========== */
         .nav {
@@ -243,18 +230,9 @@
         <img class="card-img" src="icon_home_menu_ctb.png" alt="" onclick="alert('AI错题本开发中')">
     </div>
 
-    <!-- 功能图标（5个：每日练/试卷库/听讲座/在线作业/批改任务） -->
-    <div class="func-grid">
-        <div class="func-item"><img class="func-icon-img" src="icon_daily.png" alt=""><div class="func-title">每日练</div></div>
-        <div class="func-item"><img class="func-icon-img" src="icon_paper_bank.png" alt=""><div class="func-title">试卷库</div></div>
-        <div class="func-item"><img class="func-icon-img" src="icon_lecture.png" alt=""><div class="func-title">听讲座</div></div>
-        <div class="func-item"><img class="func-icon-img" src="icon_homework.png" alt=""><div class="func-title">在线作业</div></div>
-        <div class="func-item"><img class="func-icon-img" src="icon_correct.png" alt=""><div class="func-title">批改任务</div></div>
-    </div>
-
-    <!-- 广告（放在最下面，远离卡片和功能图标） -->
-    <div class="banner">
-        <img src="2e68bcc7ae3920719aeb93a9b0ed9421.png" alt="">
+    <!-- 功能图标+横幅（合并为一张完整大图） -->
+    <div style="padding:8px 12px">
+        <img src="func_banner_real.jpg" alt="智学网功能" style="width:100%;display:block;border-radius:12px;">
     </div>
 </div>
 
@@ -992,12 +970,7 @@ window.addEventListener('DOMContentLoaded', loadStudentInfo);
         'icon_home_menu_ctb.png',
         'card_bg.png',
         'flag.png',
-        '2e68bcc7ae3920719aeb93a9b0ed9421.png',
-        'icon_correct.png',
-        'icon_daily.png',
-        'icon_paper_bank.png',
-        'icon_lecture.png',
-        'icon_homework.png'
+        'func_banner_real.jpg'
     ];
     var CACHE_KEY = '__img_cache_v1';
 
@@ -1041,4 +1014,3 @@ window.addEventListener('DOMContentLoaded', loadStudentInfo);
 })();
 </script>
 </html>
-
