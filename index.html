@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>智学网 - 学生端</title>
+
+    <!-- 图片预加载：浏览器会在渲染前就开始下载这些图片 -->
+    <link rel="preload" href="avatar.png" as="image">
+    <link rel="preload" href="loading0003.png" as="image">
+    <link rel="preload" href="icon_home_menu_cjcx.png" as="image">
+    <link rel="preload" href="icon_home_menu_ctb.png" as="image">
+    <link rel="preload" href="card_bg.png" as="image">
+    <link rel="preload" href="flag.png" as="image">
+    <link rel="preload" href="2e68bcc7ae3920719aeb93a9b0ed9421.png" as="image">
+    <link rel="preload" href="icon_correct.png" as="image">
+    <link rel="preload" href="icon_daily.png" as="image">
+    <link rel="preload" href="icon_paper_bank.png" as="image">
+    <link rel="preload" href="icon_lecture.png" as="image">
+    <link rel="preload" href="icon_homework.png" as="image">
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
         body { background: #f5f7fa; font-size: 16px; color: #333; max-width: 480px; margin: 0 auto; min-height: 100vh; }
@@ -40,10 +55,6 @@
         .func-icon-img { width: 48px; height: 48px; display: block; margin: 0 auto 4px; border-radius: 14px; }
         .func-title { font-size: 12px; color: #333; }
 
-        /* 真实功能图标+广告横幅（替换原来的func-grid和banner） */
-        .func-banner-real { margin: 0; border-radius: 12px; overflow: hidden; }
-        .func-banner-real img { width: 100%; display: block; border-radius: 12px; }
-
         /* ========== 广告横幅（移到最下面，远离卡片）========== */
         .banner { margin: 30px 12px 20px 12px; border-radius: 12px; overflow: hidden; background: transparent; }
         .banner img { width: 100%; display: block; border-radius: 12px; }
@@ -75,15 +86,12 @@
         .exam-tab { float: left; padding: 8px 18px; font-size: 15px; color: #666; cursor: pointer; border: 2px solid #00BFA5; border-radius: 20px; margin-right: 10px; background: #fff; }
         .exam-tab.active { background: #00BFA5; color: #fff; font-weight: 500; }
         .exam-year { float: right; font-size: 14px; color: #666; line-height: 38px; }
-        .exam-item { background: #fff; padding: 18px 16px; border-bottom: 1px solid #f5f5f5; cursor: pointer; position: relative; }
+        .exam-item { background: #fff; padding: 18px 16px; border-bottom: 1px solid #f5f5f5; cursor: pointer; }
         .exam-item:active { background: #fafafa; }
         .exam-name { font-size: 15px; color: #333; margin-bottom: 8px; }
         .exam-name::after { content: '>'; color: #ccc; margin-left: 6px; font-weight: 400; }
         .exam-date { font-size: 13px; color: #999; }
         .exam-status { float: right; font-size: 14px; color: #FF976A; font-weight: 500; margin-top: -22px; }
-        /* 删除按钮 */
-        .exam-del-btn { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: #FF5252; color: #fff; font-size: 12px; padding: 4px 12px; border-radius: 4px; display: none; z-index: 2; }
-        .exam-item.show-del .exam-del-btn { display: block; }
 
         /* ========== 学情报告详情页 ========== */
         .subject-tabs { display: flex; background: #fff; overflow-x: auto; white-space: nowrap; padding: 0 12px; border-bottom: 1px solid #f0f0f0; }
@@ -134,7 +142,7 @@
         .diagnosis-title { font-size: 15px; color: #999; }
         .diagnosis-explain { font-size: 13px; color: #00BFA5; cursor: pointer; }
         .diagnosis-subject { font-size: 17px; font-weight: 500; color: #333; text-align: center; margin-bottom: 8px; }
-        .radar-area { height: 280px; }
+        .radar-area { height: 220px; }
         .radar-legend { display: flex; justify-content: center; gap: 20px; margin-top: 12px; flex-wrap: wrap; }
         .rl-item { display: flex; align-items: center; font-size: 12px; color: #666; gap: 4px; }
         .rl-dot { width: 10px; height: 3px; border-radius: 2px; }
@@ -235,9 +243,18 @@
         <img class="card-img" src="icon_home_menu_ctb.png" alt="" onclick="alert('AI错题本开发中')">
     </div>
 
-    <!-- 功能图标 + 广告横幅（用真实智学网截图代替） -->
-    <div class="func-banner-real">
-        <img src="func_banner_real.jpg" alt="智学网功能">
+    <!-- 功能图标（5个：每日练/试卷库/听讲座/在线作业/批改任务） -->
+    <div class="func-grid">
+        <div class="func-item"><img class="func-icon-img" src="icon_daily.png" alt=""><div class="func-title">每日练</div></div>
+        <div class="func-item"><img class="func-icon-img" src="icon_paper_bank.png" alt=""><div class="func-title">试卷库</div></div>
+        <div class="func-item"><img class="func-icon-img" src="icon_lecture.png" alt=""><div class="func-title">听讲座</div></div>
+        <div class="func-item"><img class="func-icon-img" src="icon_homework.png" alt=""><div class="func-title">在线作业</div></div>
+        <div class="func-item"><img class="func-icon-img" src="icon_correct.png" alt=""><div class="func-title">批改任务</div></div>
+    </div>
+
+    <!-- 广告（放在最下面，远离卡片和功能图标） -->
+    <div class="banner">
+        <img src="2e68bcc7ae3920719aeb93a9b0ed9421.png" alt="">
     </div>
 </div>
 
@@ -279,8 +296,9 @@
 
         <div class="subject-tabs">
             <div class="subject-tab active" onclick="switchSubject(this,'all')">全科</div>
-            <div class="subject-tab" onclick="switchSubject(this,'chinese')">语文</div>
-            <div class="subject-tab" onclick="switchSubject(this,'math')">数学</div>
+            <div class="subject-tab" onclick="switchSubject(this,'english')">英语</div>
+            <div class="subject-tab" onclick="switchSubject(this,'physics')">物理</div>
+            <div class="subject-tab" onclick="switchSubject(this,'biology')">生物</div>
         </div>
 
         <!-- 总分 + 装饰气泡背景 -->
@@ -292,9 +310,10 @@
 
         <!-- 科目分数 -->
         <div class="subject-score-list">
-            <div class="ss-header"><span>科目</span><span>得分/满分</span></div>
-            <div class="ss-item"><span>语文</span><span class="ss-score">82分 / 满分120分</span></div>
-            <div class="ss-item"><span>数学</span><span class="ss-score">67.5分 / 满分100分</span></div>
+            <div class="ss-header"><span>科目</span><span>原分/满分</span></div>
+            <div class="ss-item"><span>英语</span><span class="ss-score">75.5 / 100</span></div>
+            <div class="ss-item"><span>物理</span><span class="ss-score">43 / 70</span></div>
+            <div class="ss-item"><span>生物</span><span class="ss-score">31 / 50</span></div>
         </div>
 
         <!-- 近五次成绩变化 + 等级进度条(E/D/C/B/A等) + 旗子 -->
@@ -328,7 +347,7 @@
                 <span class="diagnosis-title">发挥水平学科诊断</span>
                 <span class="diagnosis-explain">说明 ⓘ</span>
             </div>
-            <div class="diagnosis-subject" id="diag-subject">语文</div>
+            <div class="diagnosis-subject" id="diag-subject">英语</div>
             <div class="radar-area" id="radar-chart"></div>
             <div class="radar-legend">
                 <span class="rl-item"><span class="rl-dot blue"></span>本次水平</span>
@@ -549,7 +568,7 @@ document.querySelector('.paper-img-area') && document.querySelector('.paper-img-
 }, { passive: false });
 document.querySelector('.paper-img-area') && document.querySelector('.paper-img-area').addEventListener('touchend', function() { lastDist = 0; });
 
-// ========== 科目切换（全科/语文/数学）==========
+// ========== 科目切换（全科/英语/物理/生物）==========
 // 等级标准：A=90-100, B=70-89, C=60-69, D=30-59, E=<30 （按百分制换算）
 function calcFlagPos(score, full) {
     var pct = score / full * 100; // 换成百分制
@@ -564,38 +583,54 @@ var subjectData = {
     'all': {
         label: '全科',
         totalScore: '149.5', fullScore: '220',
+        // 149.5/220 = 68% → C等偏高
         flagPos: calcFlagPos(149.5, 220),
         subjects: [
-            {name: '语文', score: '82', full: '120'},
-            {name: '数学', score: '67.5', full: '100'}
+            {name: '英语', score: '75.5', full: '100'},
+            {name: '物理', score: '43', full: '70'},
+            {name: '生物', score: '31', full: '50'}
         ],
-        trendMy: [130.5, 136, 143, 149.5],
-        trendClassAvg: [120.9, 126.3, 132.3, 138.8],
-        trendGradeAvg: [118, 124, 129, 135],
-        trendYMin: 110,
-        trendYMax: 170
+        trendMy: [135, 148, 168, 149.5],
+        trendClassAvg: [130, 142, 158, 145],
+        trendGradeAvg: [125, 138, 152, 140],
+        trendYMin: 120,
+        trendYMax: 180
     },
-    'chinese': {
-        label: '语文',
-        totalScore: '82', fullScore: '120',
-        flagPos: calcFlagPos(82, 120),
-        subjects: [{name: '语文', score: '82', full: '120'}],
-        trendMy: [71.5, 75, 78, 82],
-        trendClassAvg: [66.2, 69.8, 72.8, 76.5],
-        trendGradeAvg: [64, 68, 71, 74],
+    'english': {
+        label: '英语',
+        totalScore: '75.5', fullScore: '100',
+        // 75.5/100 = 75.5% → B等偏低
+        flagPos: calcFlagPos(75.5, 100),
+        subjects: [{name: '英语', score: '75.5', full: '100'}],
+        trendMy: [70, 72.5, 74, 75.5],
+        trendClassAvg: [68, 71, 73, 70.2],
+        trendGradeAvg: [65, 69, 71, 68],
         trendYMin: 55,
-        trendYMax: 95
+        trendYMax: 85
     },
-    'math': {
-        label: '数学',
-        totalScore: '67.5', fullScore: '100',
-        flagPos: calcFlagPos(67.5, 100),
-        subjects: [{name: '数学', score: '67.5', full: '100'}],
-        trendMy: [59, 61, 62.5, 67.5],
-        trendClassAvg: [54.7, 56.5, 58.1, 62.3],
-        trendGradeAvg: [52, 54, 56, 59],
-        trendYMin: 45,
-        trendYMax: 80
+    'physics': {
+        label: '物理',
+        totalScore: '43', fullScore: '70',
+        // 43/70 = 61.4% → C等偏低
+        flagPos: calcFlagPos(43, 70),
+        subjects: [{name: '物理', score: '43', full: '70'}],
+        trendMy: [38, 40, 41, 43],
+        trendClassAvg: [36, 38.5, 39.5, 40.5],
+        trendGradeAvg: [34, 37, 38, 39],
+        trendYMin: 30,
+        trendYMax: 52
+    },
+    'biology': {
+        label: '生物',
+        totalScore: '31', fullScore: '50',
+        // 31/50 = 62% → C等中等
+        flagPos: calcFlagPos(31, 50),
+        subjects: [{name: '生物', score: '31', full: '50'}],
+        trendMy: [27, 29, 30, 31],
+        trendClassAvg: [26, 28, 28.5, 28.7],
+        trendGradeAvg: [25, 27, 27.5, 28],
+        trendYMin: 22,
+        trendYMax: 36
     }
 };
 
@@ -787,16 +822,16 @@ function initCharts(){
         ]
     });
 
-    // 雷达图（发挥水平学科诊断）— 三角形正常显示
+    // 雷达图（发挥水平学科诊断）
     var rc=echarts.init(document.getElementById('radar-chart'));
     rc.setOption({
         radar:{
             indicator:[
-                {name:'语文',max:100},{name:'数学',max:100},{name:'英语',max:100}
+                {name:'英语',max:100},{name:'物理',max:100},{name:'生物',max:100}
             ],
             shape:'polygon',
-            splitNumber:5,
-            axisName:{color:'#666',fontSize:13},
+            splitNumber:4,
+            axisName:{color:'#999',fontSize:13},
             splitLine:{lineStyle:{color:'#e8e8e8'}},
             splitArea:{areaStyle:{color:['#f9f9f9','#ffffff']}},
             axisLine:{lineStyle:{color:'#e0e0e0'}}
@@ -805,9 +840,9 @@ function initCharts(){
         series:[{
             type:'radar',
             data:[
-                {value:[68,68,72],name:'本次水平',lineStyle:{color:C,width:2},itemStyle:{color:C},areaStyle:{color:'rgba(0,191,165,0.15)'}},
-                {value:[64,60,68],name:'平时水平',lineStyle:{color:'#FF9800',width:2},itemStyle:{color:'#FF9800'},areaStyle:{color:'rgba(255,152,0,0)'}},
-                {value:[62,57,65],name:'班级中等水平',lineStyle:{color:'#ccc',width:1,dashArray:[4,3]},itemStyle:{color:'#ccc'},areaStyle:{color:'rgba(204,204,204,0)'}}
+                {value:[75.5,61.4,62.0],name:'本次水平',lineStyle:{color:C,width:2},itemStyle:{color:C},areaStyle:{color:'rgba(0,191,165,0.15)'}},
+                {value:[70.0,58.0,60.0],name:'平时水平',lineStyle:{color:'#FF9800',width:2},itemStyle:{color:'#FF9800'},areaStyle:{color:'rgba(255,152,0,0)'}},
+                {value:[68.0,55.0,58.0],name:'班级中等水平',lineStyle:{color:'#ccc',width:1,dashArray:[4,3]},itemStyle:{color:'#ccc'},areaStyle:{color:'rgba(204,204,204,0)'}}
             ]
         }]
     });
@@ -824,8 +859,8 @@ window.onload=function(){
 <script src="api.js"></script>
 <script>
 // ========== 后台API连接 ==========
-var API_BASE = '/api';
-// 远程备用: var API_BASE = 'https://1it2016830hg4.vicp.fun/api';
+var API_BASE = 'https://1it2016830hg4.vicp.fun/api';
+// 本地开发时用这个: var API_BASE = 'http://localhost:5002/api';
 
 // 从后台加载学生信息
 function loadStudentInfo() {
@@ -866,46 +901,14 @@ function renderExamList() {
     items.forEach(function(el) { el.remove(); });
     
     if (!gExamList.length) return;
-    gExamList.forEach(function(exam, idx) {
+    gExamList.forEach(function(exam) {
         var el = document.createElement('div');
         el.className = 'exam-item';
-        el.dataset.id = exam.id;
-        el.onclick = function(e) {
-            // 如果点的是删除按钮，不跳转
-            if (e.target.classList.contains('exam-del-btn')) return;
-            currentExamId = exam.id; switchPage('report');
-        };
+        el.onclick = function() { currentExamId = exam.id; switchPage('report'); };
         var statusHtml = exam.status === 'pending' ? '<span class="exam-status">未发布</span>' : '';
-        el.innerHTML =
-            '<div class="exam-name">' + exam.name + '</div>' +
-            '<div class="exam-date">' + (exam.date||'') + '</div>' + statusHtml +
-            '<span class="exam-del-btn" onclick="deleteExam(\'' + exam.id + '\',this)">删除</span>';
-        // 长按显示删除按钮
-        var pressTimer;
-        el.addEventListener('touchstart', function() { pressTimer = setTimeout(function(){ el.classList.toggle('show-del'); }, 500); });
-        el.addEventListener('touchend', function() { clearTimeout(pressTimer); });
-        el.addEventListener('touchmove', function() { clearTimeout(pressTimer); });
-        el.addEventListener('mousedown', function() { pressTimer = setTimeout(function(){ el.classList.toggle('show-del'); }, 400); });
-        el.addEventListener('mouseup', function() { clearTimeout(pressTimer); });
-        el.addEventListener('mouseleave', function() { clearTimeout(pressTimer); });
+        el.innerHTML = '<div class="exam-name">' + exam.name + '</div><div class="exam-date">' + (exam.date||'') + '</div>' + statusHtml;
         container.appendChild(el);
     });
-}
-
-// 删除考试
-function deleteExam(examId, btnEl) {
-    if (!confirm('确定删除这条成绩记录？')) return;
-    fetch(API_BASE + '/exams/' + examId, { method: 'DELETE' })
-        .then(function(r) { return r.json(); })
-        .then(function(res) {
-            if (res.code === 200) {
-                btnEl.parentElement.remove();
-                gExamList = gExamList.filter(function(e) { return e.id !== examId; });
-            } else {
-                alert(res.msg || '删除失败');
-            }
-        })
-        .catch(function() { alert('网络错误，请重试'); });
 }
 
 // 从后台加载考试成绩详情
@@ -928,7 +931,7 @@ function loadExamDetail(examId) {
                     d.subjects.forEach(function(sub) {
                         var item = document.createElement('div');
                         item.className = 'ss-item';
-                        item.innerHTML = '<span>' + sub.name + '</span><span class="ss-score">' + sub.score + '分 / 满分' + sub.fullScore + '分</span>';
+                        item.innerHTML = '<span>' + sub.name + '</span><span class="ss-score">' + sub.score + ' / ' + sub.fullScore + '</span>';
                         ssList.appendChild(item);
                     });
                 }
@@ -977,4 +980,65 @@ switchPage = function(id) {
 // 启动时加载学生信息
 window.addEventListener('DOMContentLoaded', loadStudentInfo);
 </script>
+
+<!-- ========== 图片缓存机制（首次加载缓存，后续秒开）========== -->
+<script>
+(function(){
+    // 所有页面用到的图片列表
+    var IMG_LIST = [
+        'avatar.png',
+        'loading0003.png',
+        'icon_home_menu_cjcx.png',
+        'icon_home_menu_ctb.png',
+        'card_bg.png',
+        'flag.png',
+        '2e68bcc7ae3920719aeb93a9b0ed9421.png',
+        'icon_correct.png',
+        'icon_daily.png',
+        'icon_paper_bank.png',
+        'icon_lecture.png',
+        'icon_homework.png'
+    ];
+    var CACHE_KEY = '__img_cache_v1';
+
+    // 检查是否已缓存过（localStorage 标记 + 浏览器 HTTP 缓存）
+    var cached = localStorage.getItem(CACHE_KEY);
+
+    if (cached) {
+        // 已经缓存过 → 图片在浏览器 HTTP 缓存中，直接使用，无需重新下载
+        console.log('[图片缓存] 已命中，所有图片从浏览器缓存加载');
+    } else {
+        // 首次访问 → 后台静默预加载所有图片到浏览器缓存
+        console.log('[图片缓存] 首次访问，开始预加载 ' + IMG_LIST.length + ' 张图片...');
+        var loaded = 0;
+        var total = IMG_LIST.length;
+
+        IMG_LIST.forEach(function(src){
+            var img = new Image();
+            img.onload = function(){
+                loaded++;
+                if (loaded === total) {
+                    localStorage.setItem(CACHE_KEY, Date.now().toString());
+                    console.log('[图片缓存] 全部预加载完成，下次打开秒出图');
+                }
+            };
+            img.onerror = function(){
+                loaded++; // 即使失败也计数，避免卡住
+                if (loaded === total) {
+                    localStorage.setItem(CACHE_KEY, Date.now().toString());
+                    console.log('[图片缓存] 预加载完成（部分图片可能不存在）');
+                }
+            };
+            img.src = src;
+        });
+    }
+
+    // 清除缓存的辅助方法（如果更新了图片，调用此方法）
+    window.clearImgCache = function() {
+        localStorage.removeItem(CACHE_KEY);
+        location.reload(true); // 强制刷新，重新下载
+    };
+})();
+</script>
 </html>
+
